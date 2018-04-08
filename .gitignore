@@ -1,0 +1,9 @@
+# latex build files
+*.aux
+*.log
+
+# non-published .pdf
+coding-standards/*.pdf
+requirements/*.pdf
+testing-policy/*.pdf
+user-manual/*.pdf
