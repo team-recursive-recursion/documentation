@@ -1,5 +1,18 @@
 \documentclass{article}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{backcolor}{rgb}{0.95, 0.95, 0.95}
+
+\lstdefinestyle{codestyle} {
+    backgroundcolor=\color{backcolor},
+    numbers=left,
+    numbersep=5pt
+}
+
+\lstset{style=codestyle}
+
 \title{
     Coding Standards\\
     \begin{large}
@@ -28,11 +41,76 @@
     %===========================================================================
     \pagenumbering{arabic}
 
-    \section{Sample Section}
+    \section{File Standards}
+    \label{sec:fs}
 
-    \subsection{Sample Subsection}
+    \subsection{Format}
+    \label{sec:fs-format}
+
+    \begin{itemize}
+        \item Files are encoded using the \textbf{UTF-8} character set.
+        \item Lines should not be longer than \textbf{80 columns}.
+        \item \textbf{Soft tabs} equating to \textbf{4 spaces} should be used.
+        \item Each level of indentation uses \textbf{1 tab}.
+        \item Continuation indentation uses \textbf{2 tabs}.
+        \item Every file contains a \textbf{file header} (described below).
+    \end{itemize}
+
+    \subsection{Headers}
+    \label{sec:fs-headers}
 
     \paragraph{}
-    Sample paragraph\ldots
+    Headers are always on the first line of a file and are placed in comments.
+    See section \ref{sec:ls} for language-specific header styling. Each header
+    contains the following information:
+
+    \begin{itemize}
+        \item Name of the file
+        \item Author of the file
+        \item Name of the class(es) contained within the file (if any)
+        \item Short description of the file
+    \end{itemize}
+
+    An example header in Java will look like the following:
+
+    \begin{lstlisting}[language=Java]
+/***
+ * Filename: SampleClass.java
+ * Author  : John Doe
+ * Class   : SampleClass
+ *
+ *     The SampleClass contains many different sample
+ *     methods.
+ ***/
+    \end{lstlisting}
+
+    \newpage
+
+    \section{Language Standards}
+    \label{sec:ls}
+
+    \subsection{Java \& C\#}
+    \label{sec:ls-jcs}
+
+    \subsection{TypeScript}
+    \label{sec:ls-ts}
+
+    \subsection{HTML \& CSS}
+    \label{sec:ls-hc}
+
+    \newpage
+
+    \section{Directory Structure}
+    \label{sec:ds}
+
+    \newpage
+
+    \section{Git Standards}
+    \label{sec:gs}
+
+    \newpage
+
+    \section{Code Review}
+    \label{sec:cr}
 
 \end{document}
