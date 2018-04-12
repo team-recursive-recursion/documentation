@@ -277,17 +277,63 @@ more {
 
     \newpage
 
-    \section{Directory Structure}
-    \label{sec:ds}
+    \section{Repositories Structure}
+    \label{sec:rs}
 
-    \newpage
+    \subsection{Git Repositories}
+    \label{sec}
 
-    \section{Git Standards}
-    \label{sec:gs}
+    \paragraph{}
+    There are four (4) repositories that are used for the project:
+    \texttt{web-app}, \texttt{mobile-app}, \texttt{mapper-api} and
+    \texttt{documentation}.
 
-    \newpage
+    \begin{itemize}
+        \item \texttt{web-app}
+            \subitem The web application used for mapping golf courses.
+        \item \texttt{mobile-app}
+            \subitem The Android application used for viewing golf courses.
+        \item \texttt{mapper-api}
+            \subitem The API used to access the database.
+        \item \texttt{documentation}
+            \subitem All documentation relating to the project, including this
+                    file.
+    \end{itemize}
 
-    \section{Code Review}
-    \label{sec:cr}
+    \subsection{File Structure}
+
+    \paragraph{}
+    Each repository has a \texttt{README.md}, \texttt{LICENSE.txt} and a
+    \texttt{.gitignore} file in the root of the repository.
+
+    \paragraph{}
+    \texttt{mapper-api} and \texttt{web-app} contain a folder that contains
+    the source code of the project. The folder is organised according to the
+    standard template of \textit{ASP.NET Core} web applications.
+
+    \paragraph{}
+    \texttt{mobile-app} contains a folder that contains the source code of the
+    project. The folder is organised according to the standard template of
+    \textit{Android Studio} projects.
+
+    \paragraph{}
+    \texttt{documentation} contains a folder for each of the four (4) documents.
+    These folders contain the \texttt{.tex} source files of the documents, as
+    well as any auxiliary files that are needed by the document. In addition,
+    there is a \texttt{publish} folder that contains the final PDF versions of
+    each document, and a \texttt{other} folder that contains extra documents
+    that do not form part of one of the four (4) main documents.
+
+
+    % TODO git standards & code review
+    %\newpage
+
+    %\section{Git Standards}
+    %\label{sec:gs}
+
+    %\newpage
+
+    %\section{Code Review}
+    %\label{sec:cr}
 
 \end{document}
