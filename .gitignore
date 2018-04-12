@@ -1,6 +1,7 @@
 # latex build files
 *.aux
 *.log
+*.out
 
 # non-published .pdf
 coding-standards/*.pdf
