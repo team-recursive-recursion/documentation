@@ -1,5 +1,16 @@
 \documentclass{article}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{backcolor}{rgb}{0.95, 0.95, 0.95}
+
+\lstdefinestyle{codestyle} {
+    backgroundcolor=\color{backcolor}
+}
+
+\lstset{style=codestyle}
+
 \title{
     Coding Standards\\
     \begin{large}
@@ -28,11 +39,301 @@
     %===========================================================================
     \pagenumbering{arabic}
 
-    \section{Sample Section}
+    \section{File Standards}
+    \label{sec:fs}
 
-    \subsection{Sample Subsection}
+    \subsection{Format}
+    \label{sec:fs-format}
+
+    \begin{itemize}
+        \item Files are encoded using the \textbf{UTF-8} character set.
+        \item Lines should not be longer than \textbf{80 columns}.
+        \item \textbf{Soft tabs} equating to \textbf{4 spaces} should be used.
+        \item Each level of indentation uses \textbf{1 tab}.
+        \item Continuation indentation uses \textbf{2 tabs}.
+        \item Every file contains a \textbf{file header} (described below).
+    \end{itemize}
+
+    \subsection{Headers}
+    \label{sec:fs-headers}
 
     \paragraph{}
-    Sample paragraph\ldots
+    Headers are always on the first line of a file and are placed in comments.
+    See section \ref{sec:ls} for language-specific header styling. Each header
+    contains the following information:
+
+    \begin{itemize}
+        \item Name of the file
+        \item Author of the file
+        \item Name of the class(es) contained within the file (if any)
+        \item Short description of the file
+    \end{itemize}
+
+    Header files are structured as the following:
+
+    \begin{lstlisting}[language=Java]
+Filename: File.ext
+Author  : John Doe
+Class   : SampleClass
+
+    The SampleClass contains many different sample
+    methods.
+    \end{lstlisting}
+
+    \newpage
+
+    \section{Language Standards}
+    \label{sec:ls}
+
+    \subsection{Java, C\# \& TypeScript}
+    \label{sec:ls-java}
+
+    \subsubsection{Naming Conventions}
+    \label{sec:ls-java-nc}
+
+    \begin{itemize}
+        \item \textbf{Variables} are named using camel casing. Descriptive names
+                should be used with the exception of counters in loops.
+        \item \textbf{Member variables} are named similarly to regular variables
+                with the addition of an \textit{underscore} prefix.
+        \item \textbf{Classes} start with a \textit{capital} letter and use
+                camel casing.
+        \item \textbf{Functions} are also named similar to regular variables and
+                should be descriptive.
+        \item \textbf{Recursive functions} are named similarly to regular
+                functions, but have a \texttt{\_r} postfix to the name.
+    \end{itemize}
+
+    \begin{lstlisting}[language=java]
+class SampleClass {
+
+    int _someMember;
+
+    public void myFunction() {
+        int someInteger;
+    }
+
+    public void myFunction_r() {
+        myFunction_r();
+    }
+}
+    \end{lstlisting}
+
+    \subsubsection{Style}
+    \label{sec:ls-java-st}
+
+    \paragraph{}
+    \textbf{Braces} will be styled in the following manner:
+    \begin{itemize}
+        \item Opening braces are placed on the same line as the header.
+        \item Closing braces are placed on a separate line at the same
+                indentation level as the header.
+        \item Else clauses are placed on the same line as the closing brace.
+        \item While clauses of a do-while are placed on the same line as the
+                closing brace.
+        \item Braces are never left out for one-line loops or conditions.
+    \end{itemize}
+
+    \begin{lstlisting}[language=Java]
+if (condition) {
+    statement;
+} else {
+    statement;
+}
+
+while (condition) {
+    statement;
+}
+
+do {
+    statement;
+} while (condition);
+
+class SampleClass {
+    public void method() {
+        statement;
+    }
+}
+    \end{lstlisting}
+
+    \textbf{Continuation lines} should end on the operator as to indicate that
+    the line is not complete and has a continuation.
+
+    \begin{lstlisting}[language=Java]
+double result = example + of + (a * very) / 
+        long - equation;
+    \end{lstlisting}
+
+    \subsubsection{Comments}
+    \label{sec:ls-java-com}
+
+    \paragraph{}
+    \textbf{File headers} are structured according to section
+    \ref{sec:fs-headers} and are styled as the following:
+
+    \begin{lstlisting}[language=Java]
+/***
+ * Filename: SampleClass.java
+ * Author  : John Doe
+ * Class   : SampleClass
+ *
+ *     The SampleClass contains many different sample
+ *     methods.
+ ***/
+    \end{lstlisting}
+
+    \textbf{Function headers} are provided for every function and take the
+    following form (the description can be omitted in the case of simple
+    functions, such as mutators \& accessors).
+
+    \begin{lstlisting}[language=Java]
+/***
+ * function(ParType1, ParType2) : ReturnType
+ *
+ *     Description of the function.
+ ***/
+ReturnType function(ParType1 p1, ParType2 p2) {
+    ...
+}
+
+
+/***
+ * SampleClass(ParType1, ParType2) <<constructor>>
+ *
+ *     Description of the constructor.
+ ***/
+SampleClass(ParType1 p1, ParType2 p2) {
+    ...
+}
+    \end{lstlisting}
+
+    \textbf{Inline comments} should be kept to a minimum, since code should be
+    self-documenting. Only use inline comments in the case of code that may be
+    difficult to understand.
+
+    \subsection{HTML \& CSS}
+    \label{sec:ls-html}
+
+    \subsubsection{Style}
+    \label{sec:ls-html-st}
+
+    \paragraph{}
+    \textbf{CSS} should be styled as follows:
+
+    \begin{lstlisting}
+selectors {
+    some-attribute : style;
+    another-attribute : style;
+}
+
+more {
+    some-attribute : style;
+}
+    \end{lstlisting}
+
+    \textbf{HTML style} follows the following rules:
+
+    \begin{itemize}
+        \item Opening and closing tags of \textbf{block} elements should be kept
+            on their own lines, with the content indented.
+        \item Opening and closing tags of \textbf{inline} elements should be
+            kept on the same line, with the content between the tags.
+    \end{itemize}
+
+    \begin{lstlisting}[language=html]
+<div>
+    <p>
+        Here is some <span class="red">red</span> text!
+    </p>
+</div>
+    \end{lstlisting}
+
+    \subsubsection{Comments}
+    \label{sec:ls-html-com}
+
+    \paragraph{}
+    \textbf{File headers} are structured according to section
+    \ref{sec:fs-headers} and are styled for CSS and HTML, respectively, as
+    the following:
+
+    \begin{lstlisting}[language=java]
+/***
+ * Filename: style.css
+ * Author  : John Doe
+ *
+ *     The styling for some example page is contained
+ *     here and applies a material style.
+ ***/
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=html]
+<!--
+    Filename: page.html
+    Author  : John Doe
+    
+        The page displays some content.
+-->
+    \end{lstlisting}
+
+    \newpage
+
+    \section{Repositories Structure}
+    \label{sec:rs}
+
+    \subsection{Git Repositories}
+    \label{sec}
+
+    \paragraph{}
+    There are four (4) repositories that are used for the project:
+    \texttt{web-app}, \texttt{mobile-app}, \texttt{mapper-api} and
+    \texttt{documentation}.
+
+    \begin{itemize}
+        \item \texttt{web-app}
+            \subitem The web application used for mapping golf courses.
+        \item \texttt{mobile-app}
+            \subitem The Android application used for viewing golf courses.
+        \item \texttt{mapper-api}
+            \subitem The API used to access the database.
+        \item \texttt{documentation}
+            \subitem All documentation relating to the project, including this
+                    file.
+    \end{itemize}
+
+    \subsection{File Structure}
+
+    \paragraph{}
+    Each repository has a \texttt{README.md}, \texttt{LICENSE.txt} and a
+    \texttt{.gitignore} file in the root of the repository.
+
+    \paragraph{}
+    \texttt{mapper-api} and \texttt{web-app} contain a folder that contains
+    the source code of the project. The folder is organised according to the
+    standard template of \textit{ASP.NET Core} web applications.
+
+    \paragraph{}
+    \texttt{mobile-app} contains a folder that contains the source code of the
+    project. The folder is organised according to the standard template of
+    \textit{Android Studio} projects.
+
+    \paragraph{}
+    \texttt{documentation} contains a folder for each of the four (4) documents.
+    These folders contain the \texttt{.tex} source files of the documents, as
+    well as any auxiliary files that are needed by the document. In addition,
+    there is a \texttt{publish} folder that contains the final PDF versions of
+    each document, and a \texttt{other} folder that contains extra documents
+    that do not form part of one of the four (4) main documents.
+
+
+    % TODO git standards & code review
+    %\newpage
+
+    %\section{Git Standards}
+    %\label{sec:gs}
+
+    %\newpage
+
+    %\section{Code Review}
+    %\label{sec:cr}
 
 \end{document}
