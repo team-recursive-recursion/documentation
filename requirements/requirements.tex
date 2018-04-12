@@ -1,38 +1,89 @@
-\documentclass{article}
+\documentclass[12]{article}
 
-\title{
-    Software Requirements \& Design\\
-    \begin{large}
-        \textit{Golf Course Mapper}
-    \end{large}
-}
-\date{
-    \begin{small}
-        \today
-    \end{small}
-}
-\author{
-    Team Recursive Recursion
-}
+\title{COS 301 Software Requirements Specification}
+\date{}
+\author{Recursive Recursion}
 
 \begin{document}
-    %===========================================================================
-    % TITLE
-    %===========================================================================
-    \pagenumbering{gobble}
-    \maketitle
-    \newpage
+\maketitle
 
-    %===========================================================================
-    % DOCUMENT
-    %===========================================================================
-    \pagenumbering{arabic}
+\section{Introduction}
+The Golf Course Mapper Project created by Recursive Recursion under guidance and instruction of Retro Rabbit.
+\subsection{Purpose}
+The SRS (Software Requirements Specification) is intended to be a guide on the path of System development. It will aid the developers by providing a layout of the Project requirements.
+\subsection{Scope}
+ The Golf Course Mapper consists of a website that is be used by Golf Course owners to map out the shape of their golf courses and mark features of interest to players such as the hole, fairway, sand bunkers and water hazards. The project includes a mobile application used by Golf Players to see their location while on a mapped golf course. This will display their distance from the hole and show hazards/obstacles on the course.
+\subsection{Definitions}
+\begin{itemize}
+	\item
+	Website: A web interface that is used by golf course owners/managers to draw the shape of their golf courses on.
+	\item
+	Mobile App: An Android mobile App golf players can use to view the golf course and see other information of interest.
+	\item
+	Polygon: The shape drawn on the website to represent a feature of the golf course e.g. the "green", "Fairway" or "hole".
+	\item
+	Back end: The server side where the polygons are stored in a database.
+	\item
+	DBMS: Database Management System	
+	\item
+	API: Application Programming Interface. This is used to simplify production. It abstracts processes to reduce Technical requirements.
+\end{itemize}
 
-    \section{Sample Section}
+\section{Project Description} 
+\subsection{Product Perspective}
+The product has two user interfaces namely the website and the mobile application.\\
+The Map that is displayed on the both the website and the mobile application is created using the Google Maps API. A custom API was created to make database manipulation easier.\\
+The mobile application is light weight on processing and memory usage since it is only used to view the map and do minor calculations such as distance calculation.
 
-    \subsection{Sample Subsection}
+\subsection{Product Functions}
+The main functions are
+\begin{enumerate}
+	\item
+	Drawing polygons on a map to represent a golf course
+	\item
+	Displaying the map with the polygons on a mobile device used by golfers.
+	\item
+	Calculate the distance between the player and the hole as well as indicating hazards or  obstacles between the player and the hole.
+\end{enumerate}
 
-    \paragraph{}
-    Sample paragraph\ldots
+\subsection{User Characteristics}
+The product is very simple to use for anyone that has ever had any experience working with Google Maps.\\
+All icons and user interfaces are designed to be as intuitive as possible. This removes the need of a detailed tutorial on how to use the system.
+
+\subsection{Constraints}
+Using a DBMS that simplifies the use of Geographical objects greatly improves the development time but it restricts the choice of DBMSs\\
+The Google Maps API offers 25000 free map loads. After that limit is reached an additional fee will be charged for every 1000 loads over the limit.
+
+\section{Specific Requirements}
+\subsection{Functional Requirements}
+\begin{itemize}
+	\item
+	The system shall provide a web interface to draw polygons on a map.
+	\item
+	The system shall be able to draw multiple polygons over one another.
+	\item
+	The system shall be able to save polygons and their location to a database.
+	\item
+	The system shall be able to retrieve polygons from the database to the web interface for further editing.
+	\item
+	The system shall provide a mobile application to view maps on.
+	\item
+	The system shall be able to display the user's location on the mobile application.
+	\item
+	The system shall be able to retrieve and display polygons from the database on the map.
+	\item
+	The system shall calculate and display the distance the user is from the hole.
+	\item
+	The system shall display hazards and obstacles on the course between the user and the hole.
+\end{itemize}
+\subsection{Performance Requirements}
+\begin{itemize}
+	\item
+	The system shall be responsive.
+	\item
+	The system shall use the Google Maps API sparingly to reduce run cost.
+	
+\end{itemize}
+
 
 \end{document}
