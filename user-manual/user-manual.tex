@@ -42,37 +42,61 @@ Golf players will be able to view the map via their Android phones, enabling the
 	\section{System Configuration}
 	 \includegraphics[scale=0.25]{sys-conf-diagram.jpg}
 	\paragraph{•}
-	  The web application and the mobile application connects to the server to retrieve data. An Internet connection is needed to load the map on both the web application and mobile application.
+	  The website and the mobile application connects to the server to retrieve data. An Internet connection is needed to load the map on both the web and mobile application. It is recommended to have Android 4.4 or later for the mobile application. The latest version of Internet Explorer, Google Chrome or Mozilla Firefox is recommended.
 	
 	\section{Getting Started}
 	\paragraph{•}
 	
-	Web Application: To access the web application go to the URL (http://localhost:5000/home). There is no authentication needed to access the web application.
+	Website: To access the website go to the URL (http://localhost:5000/).If this is your first time using the website, please register your credentials. If you have used the website before login with your credential that you used to register. 
 	
 	Mobile Application: To access the mobile application press on the application on a mobile device.
 	\section{Using the System}
-    \subsection{Web Application}
+	
+	\subsection{Register and Login}
+	\includegraphics[scale=0.25]{Register}
+	\paragraph{•}
+    Figure 1.
+	\subsubsection{Register}
+	\paragraph{•}
+	To register for the website, type in your credentials in the text boxes as seen in figure 1. The fields are Email, First Name, Last Name, Password and Confirm Password. After your details have been entered, click on the Register button to register.
+	
+		
+	
+	\includegraphics[scale=0.25]{Login}
+	\paragraph{•}
+    Figure 2.
+	\subsubsection{Login}
+	\paragraph{•}
+	After you have successfully registered your credentials (see 4.1 for more details). Type in the same Email and Password that you registered with, click on the Login button to login. As seen in figure 2.
+	
+    \subsection{Website}
     \includegraphics[scale=0.25]{map}
     \paragraph{•}
-    Figure 1.
+    Figure 3.
     
     \subsubsection{Create Course}
     \paragraph{•}
-    Type in the name of the desired golf course to create the course as shown in Figure 1. After a appropriate name has been chosen, click on the "Create Course" button. The course will now be created with the chosen name.
+    Type in the name of the desired golf course to create the course as shown in Figure 3. After a appropriate name has been chosen, click on the "Create" button. The course will now be created with the chosen name.
+    
+	\subsubsection{Load Course}    
+	\paragraph{•}
+	To load a course click on the Load Courses select box as seen in figure 3. After the desired course has been selected click on the Load button, the desired course will now be loaded.
+	
+	\subsubsection{Delete Course}
+	\paragraph{•} 
+	To delete a course click on the Load Course select box as seen in figure 3. After the desired course has been selected, click on the delete button to delete the course.
+    
     
     \subsubsection{Save Course} 
     \paragraph{}
     After changes has been been to the current course,click on the "Save Course" button to save the changes made.
     
-    
-    \subsubsection{Load Course}
-    \paragraph{}
-    To load a course type in the name of the course that you want to load, in the "Course ID" edit box. Click on the "Load Course" button. The loaded course will now be shown. See Figure 1 for reference.
+
     
     \subsubsection{Polygon}
     
     \paragraph{}
-    To create a polygon click on the map to create a dot (vertex). By clicking multiple times on the map the polygon will be constructed. When the desired polygon is completed click on the "Save Polygon" button, as indicated in Figure 1. The polygon will now become inactive and cannot be edited.
+    To create a polygon click on the map to create a dot (vertex). By clicking multiple times on the map the polygon will be constructed. When the desired polygon is completed click on the "Save Polygon" button, as indicated in Figure 3. The polygon will now become inactive and cannot be edited.
     
     \subsubsection{Polygon Types}
 
@@ -98,6 +122,11 @@ Golf players will be able to view the map via their Android phones, enabling the
 	
 	\paragraph{•}
 	Move around by touching and zoom by pinching the screen. Move to the location of gold course created to view the course.
+	
+	\subsubsection{Select Course}
+	\includegraphics[scale=0.8]{CourseListUI.PNG}
+	\paragraph{•}
+	Press on the Courses item in the bottom navigation bar to view to available courses. Press on the desired course to view the course. 
 	
 	
 \end{document}
