@@ -118,40 +118,12 @@
     	\caption{Domain model}
     	\label{domainmodel}
     \end{figure}
-    
-    
 
     \newpage
 
     \section{Overall Description} 
 
     \subsection{Product Perspective}
-
-    \subsubsection{System Interfaces}
-    The System consists of three subsystems, namely the \textit{Mobile App},
-    the \textit{Website} and the \textit{Back End}. The Back End additionally
-    consists of the \textit{DBMS} and \textit{API} subsystems.
-
-    \subsubsection{User Interfaces}
-    \ldots
-
-    \subsubsection{Hardware Interfaces}
-    \ldots
-
-    \subsubsection{Software Interfaces}
-    \ldots
-
-    \subsubsection{Communication Interfaces}
-    \ldots
-
-    \subsubsection{Memory}
-    \ldots
-
-    \subsubsection{Operations}
-    \ldots
-
-    \subsubsection{Site Adaptation Requirements}
-    \ldots
 
     The product has two user interfaces namely the website and the mobile
     application.\\ The Map that is displayed on the both the website and the
@@ -232,7 +204,51 @@
             cost.
     \end{itemize}
 
-    \subsection{Architectural Design \& Requirements}
-    \ldots (Deployment diagram \& MVC Explanation)
+    \subsection{Architectural Requirements \& Design}
+
+    \paragraph{}
+    The System consists of three subsystems, namely the \textit{Mobile App}, the
+    \textit{Website} and the \textit{Back End}. The Back End additionally
+    consists of the \textit{DBMS} and \textit{API} subsystems. The system is
+    designed according to the MVC (Model-View-Controller) architectural pattern.
+    This choice is due to the fact that there is a single database that stores
+    information about the golf courses and that there is more than one type of
+    subsystem that interfaces with users. This allows the MVC pattern to be a
+    good choice since it allows the abstraction of a model from the views, and
+    also protects access to the model by the use of a controller. The
+    abstraction created by the controller also increases the ease of maintaining
+    the connection between the views and the model.
+
+    \paragraph{}
+    Figure \ref{deploymentdiagram} shows the deployment diagram of the system and it's
+    subsystems. From here it is easy to identify the different components of the
+    MVC pattern:
+
+    \begin{itemize}
+        \item \textbf{Model} - The DBMS serves as the model component by storing
+            the information required by the system. The DBMS is solely and
+            exclusively responsible for the store and retrieval of data,
+            as well as enforcing integrity rules on the dataset.
+        \item \textbf{Views} - The Mobile App and Website both serve as two
+            different views. The Website is a view that uses the controller
+            to both create, update and destroy data stored within the model
+            in order to manage the mapping of golf courses. The Mobile App is
+            a simpler view with the sole purpose of fetching and displaying
+            data received from the model via the controller.
+        \item \textbf{Controller} - The API serves as the controller. It acts
+            as a level of abstraction between the model and the views by
+            controlling the access to the model.
+    \end{itemize}
+
+    \paragraph{}
+
+    \begin{center}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.9]{DeploymentDiagram}
+            \caption{Deployment diagram}
+            \label{deploymentdiagram}
+        \end{figure}
+    \end{center}
 
 \end{document}
