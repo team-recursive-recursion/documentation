@@ -190,32 +190,38 @@
     \section{Specific Requirements}
 
     \subsection{Functional Requirements}
+    The functional requirements describes the functionality that the System provides. It is drawn from user stories that is also, for simplicity's sake, modelled in figure \ref{fig:usecase1}.
     \begin{itemize}
         \item
-            The system shall provide a web interface to draw polygons on a map.
+            The Manager will register to the Website.
         \item
-            The system shall be able to draw multiple polygons over one another.
+            The registered Manager will log into the Website.
         \item
-            The system shall be able to save polygons and their location to a
-            database.
+            The Manager will create Golf courses.
         \item
-            The system shall be able to retrieve polygons from the database to
-            the web interface for further editing.
+            The Manager will add polygons to the course.
         \item
-            The system shall provide a mobile application to view maps on.
+            The Manager will load previously created courses.
         \item
-            The system shall be able to display the user's location on the
-            mobile application.
+            The Manager will edit courses by drawing extra polygons or removing existing ones.
         \item
-            The system shall be able to retrieve and display polygons from the
-            database on the map.
+        	The Manager will view the map.
         \item
-            The system shall calculate and display the distance the user is from
-            the hole.
+            The Player will view the map on the Mobile App.
         \item
-            The system shall display hazards and obstacles on the course between
-            the user and the hole.
+            The Player will select a course of interest  from a list of existing courses.
+        \item
+            The Player will view the selected course.
+        \item
+        	The Player will view his position on the map.
     \end{itemize}
+    
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{UsecaseDiagram}
+    \caption{Use case Diagram}
+    \label{fig:usecase1}
+    \end{figure}
 
     \subsection{Performance Requirements}
     \begin{itemize}
