@@ -82,12 +82,33 @@
             API: Application Programming Interface.
     \end{itemize}
 
-    \subsection{Overview}
-    
+    \subsection{Domain Model}
+
     \paragraph{}
-    The remainder of the SRS will continue to describe the functional,
-    architectural and other requirements of the system as specified in the
-    IEEE Std 830-1998 SRS standard.
+    Refer to figure \ldots, which represents the domain model of the system. At
+    the core of the domain model is the \textit{Golf Course} which represents a
+    single area where \textit{Players} can go to play the game of golf. Each
+    Player is associated with a single Golf Course on which the Player is
+    currently playing. Each Golf Course has an assigned \textit{Manager} that is
+    solely responsible for mapping and managing the information of the Golf
+    Course. Note that a Manager can be assigned to more than one Golf Course.
+
+    \paragraph{}
+    Each Golf Course has one or more \textit{Holes} associated with it. A Hole
+    represents a single playable map with different \textit{Elements} of spatial
+    information. The Elements can be of two different types: \textit{Point}
+    Elements and \textit{Polygon} Elements. A Point Element represents
+    single-point information of a Hole such as the teeing grounds, location of
+    the hole and other points of interest. Polygon Elements represent area
+    information of a Hole, such as the area of the rough, fairway, green and
+    water and sand hazards.
+
+    \paragraph{}
+    A Golf Course may also optionally have Elements that are not associated with
+    a specific Hole. This allows the specification of Elements such as points of
+    interest or hazardous areas such as bodies of water that may be important to
+    more than one Hole. It therefore does not make sense to associate these
+    Elements with a specific Hole, but rather with the Golf Course as a whole.
 
     \newpage
 
@@ -193,5 +214,8 @@
             The system shall use the Google Maps API sparingly to reduce run
             cost.
     \end{itemize}
+
+    \subsection{Architectural Design \& Requirements}
+    \ldots (Deployment diagram \& MVC Explanation)
 
 \end{document}
