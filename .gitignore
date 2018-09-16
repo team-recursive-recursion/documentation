@@ -2,6 +2,10 @@
 *.aux
 *.log
 *.out
+*.fdb_latexmk
+*.fls
+*.synctex*
+*.toc
 
 # non-published .pdf
 coding-standards/*.pdf
