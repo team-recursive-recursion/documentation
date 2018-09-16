@@ -22,38 +22,55 @@
     \maketitle
     \newpage
 
+    \tableofcontents
+    \newpage
+
     \pagenumbering{arabic}
-    \section{Introduction}
+
+    %===========================================================================
+    
+    \section{Overview}
 
     \subsection{Purpose}
 
-    \paragraph{}
     This Software Requirements Specification (henceforth SRS) is intended to be
-    a guide on the path of system development. It will aid the developers by
-    providing a layout of the project requirements.
+    a guide on the path of developing the Golf Course Mapper system. It will
+    aid the developers by providing a layout of the project requirements.
 
     \subsection{Scope}
 
-    \paragraph{}
+    Golf players require an application that allows them to view golf courses
+    during play. Although there are existing platforms that aim to achieve this
+    goal, many of them are simply mappers and do not allow the player to view
+    their location on the map.
+    
+    Furthermore, the proprietary and commercial nature of existing products
+    make them difficult to be used widely and therefore contain only a handful
+    of mapped courses. The Golf Course Mapper will attempt to achieve these
+    goals by providing a rich set of features for both the course managers and
+    players through an open source platform.
+
     The Golf Course Mapper will allow golf course managers to draw the shape of
     their courses using a web application. The owners will map out the details
     of the golf course. This includes mapping the layout of the fairway, green,
     sand and water hazards and details such as the position of the hole and the
-    teeing grounds.
+    teeing grounds. Additionally, owners will be allowed to view their courses
+    and see the locations of active players currently using the mobile
+    application.
 
-    \paragraph{}
-    Players currently on the course will then be able to use the provided mobile
+    Players currently on the course will be able to use the provided mobile
     application to view the map of the course and where they are on it
-    currently. This has the benefit of allowing players to plan their shots more
-    strategically.
+    currently. This has the benefit of allowing players to plan their shots
+    more strategically. The app will show the distances between the player and
+    various points of interest (such as the hole), further aiding the player
+    during play.
 
-    \paragraph{}
-    The Golf Course Mapper is not a coaching tool and does not provide a channel
-    of communication between the mapper and the player. The web application is
-    not to be used by coaches, but solely by managers that wish to map out the
-    details of their courses. The Golf Course Mapper is also not a social media
-    platform for golfers and will not allow direct communication between
-    players.
+    The Golf Course Mapper is not a coaching tool and does not provide a
+    channel of communication between the mapper and the player. The web
+    application is not to be used by coaches, but solely by managers that wish
+    to map out the details of their courses and view its current state. The
+    Golf Course Mapper is also not a social media platform for golfers and will
+    not allow communication among players.
 
     \subsection{Definitions, Acronyms \& Abbreviations}
     \begin{itemize}
@@ -73,96 +90,81 @@
             Mobile App: A native Android mobile app that golf players can use to
             view the golf course.
         \item
-            Polygon: The shape drawn on the website to represent a feature of
-            the golf course such as the green or the fairway.
+            Location: A position on the map, modelled using latitude and longitude
+            coordinates.
         \item
-            Back End: The server side that consists of both the DBMS and the
-            API.
+            Point: A point of interest, such as the hole or tee location.
+            Points are represented as a single location on the golf course.
+        \item
+            Area: Specific areas on the golf course, such as the green or the
+            fairway. Areas consist of an ordered set of locations, forming a
+            polygon.
         \item
             DBMS: Database Management System.
         \item
             API: Application Programming Interface.
+        \item
+            Back End: The server side that consists of both the DBMS and the
+            API.
     \end{itemize}
 
     \subsection{Domain Model}
 
-    \paragraph{}
-    Refer to figure \ref{domainmodel}, which represents the domain model of the system. At
-    the core of the domain model is the \textit{Golf Course} which represents a
-    single area where \textit{Players} can go to play the game of golf. Each
-    Player is associated with a single Golf Course on which the Player is
-    currently playing. Each Golf Course has an assigned \textit{Manager} that is
-    solely responsible for mapping and managing the information of the Golf
-    Course. Note that a Manager can be assigned to more than one Golf Course.
+    Refer to figure \ref{fig:domainmodel}, which represents the domain model of
+    the system. At the core of the domain model is the \textit{Course} which
+    represents a single area where \textit{Players} can go to play the game of
+    golf. Each Player is associated with a single Course on which the Player is
+    currently playing. Each Course has an assigned \textit{Manager} that is
+    solely responsible for mapping and managing the information of the Course.
+    Note that a Manager can be assigned to more than one Course.
 
-    \paragraph{}
-    Each Golf Course has one or more \textit{Holes} associated with it. A Hole
-    represents a single playable map with different \textit{Elements} of spatial
-    information. The Elements can be of two different types: \textit{Point}
-    Elements and \textit{Polygon} Elements. A Point Element represents
-    single-point information of a Hole such as the teeing grounds, location of
-    the hole and other points of interest. Polygon Elements represent area
-    information of a Hole, such as the area of the rough, fairway, green and
-    water and sand hazards.
+    Each Course has one or more \textit{Holes} associated with it. A Hole
+    represents a single playable map with different map \textit{Elements},
+    containing information. The Elements can be of two different types:
+    \textit{Point} Elements and \textit{Area} Elements. A Point Element
+    represents single-point information of a Hole such as the teeing grounds,
+    location of the hole and other points of interest. Area Elements represent
+    area information of a Hole, such as the area of the rough, fairway, green
+    and water and sand hazards. Areas are represented as polygons.
 
-    \paragraph{}
-    A Golf Course may also optionally have Elements that are not associated with
-    a specific Hole. This allows the specification of Elements such as points of
-    interest or hazardous areas such as bodies of water that may be important to
-    more than one Hole. It therefore does not make sense to associate these
-    Elements with a specific Hole, but rather with the Golf Course as a whole.
+    A Course may also optionally have Elements that are not associated with a
+    specific Hole. This allows the specification of Elements such as points of
+    interest or hazardous areas such as bodies of water that may be important
+    to more than one Hole. It therefore does not make sense to associate these
+    Elements with a specific Hole, but rather with the Course as a whole.
     
     \begin{figure}[h]
     	\centering
-    	\includegraphics[scale=1]{DomainModel}
-    	\caption{Domain model}
-    	\label{domainmodel}
+    	\includegraphics[scale=0.5]{DomainModel}
+        \caption{Domain model of the system}
+        \label{fig:domainmodel}
     \end{figure}
 
     \newpage
 
-    \section{Overall Description} 
+    %===========================================================================
 
-    \subsection{Product Perspective}
+    \section{Functional Requirements} 
 
-    The product has two user interfaces namely the website and the mobile
-    application.\\ The Map that is displayed on the both the website and the
-    mobile application is created using the Google Maps API. A custom API was
+    \subsection{Users (todo)}
+
+    \subsection{Subsystems (todo)}
+
+    The product has two user interfaces, namely the website and the mobile
+    application. The map that is displayed on the both the website and the
+    mobile application is created using the Google Maps API. An API shall be
     created to make database manipulation easier.\\ The mobile application is
     light weight on processing and memory usage since it is only used to view
     the map and do minor calculations such as distance calculation.
 
-    \subsection{Product Functions}
-    The main functions are
-    \begin{enumerate}
-        \item
-            Drawing polygons on a map to represent a golf course
-        \item
-            Displaying the map with the polygons on a mobile device used by
-            golfers.
-        \item
-            Calculate the distance between the player and the hole as well as
-            indicating hazards or  obstacles between the player and the hole.
-    \end{enumerate}
+    Component diagram\ldots
 
-    \subsection{User Characteristics}
-    The product is very simple to use for anyone that has ever had any
-    experience working with Google Maps.\\ All icons and user interfaces are
-    designed to be as intuitive as possible. This removes the need of a detailed
-    tutorial on how to use the system.
+    \subsection{Specific Requirements (exp)}
 
-    \subsection{Constraints}
-    Using a DBMS that simplifies the use of Geographical objects greatly
-    improves the development time but it restricts the choice of DBMSs\\ The
-    Google Maps API offers 25000 free map loads. After that limit is reached an
-    additional fee will be charged for every 1000 loads over the limit.
+    The functional requirements describes the functionality that the System
+    provides. It is drawn from user stories that is also, for simplicity's
+    sake, modelled in figure \ref{fig:usecase1}.
 
-    \newpage
-
-    \section{Specific Requirements}
-
-    \subsection{Functional Requirements}
-    The functional requirements describes the functionality that the System provides. It is drawn from user stories that is also, for simplicity's sake, modelled in figure \ref{fig:usecase1}.
     \begin{itemize}
         \item
             The Manager will register to the Website.
@@ -188,6 +190,8 @@
         	The Player will view his position on the map.
     \end{itemize}
     
+    More diagrams?
+
     \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{UsecaseDiagram}
@@ -195,7 +199,28 @@
     \label{fig:usecase1}
     \end{figure}
 
-    \subsection{Performance Requirements}
+    \subsection{Product Functions (rem)}
+    The main functions are
+    \begin{enumerate}
+        \item
+            Drawing polygons on a map to represent a golf course
+        \item
+            Displaying the map with the polygons on a mobile device used by
+            golfers.
+        \item
+            Calculate the distance between the player and the hole as well as
+            indicating hazards or  obstacles between the player and the hole.
+    \end{enumerate}
+
+    \newpage
+
+    %===========================================================================
+
+    \section{Non-Functional Requirements (todo)}
+
+    Why, how and measures\ldots
+
+    \subsection{Performance Requirements (exp)}
     \begin{itemize}
         \item
             The system shall be responsive.
@@ -204,7 +229,20 @@
             cost.
     \end{itemize}
 
-    \subsection{Architectural Requirements \& Design}
+    \subsection{Usability Requirements (exp)}
+
+    The product is very simple to use for anyone that has ever had any
+    experience working with Google Maps.\\ All icons and user interfaces are
+    designed to be as intuitive as possible. This removes the need of a detailed
+    tutorial on how to use the system.
+
+    \newpage
+
+    %===========================================================================
+
+    \section{Architecture}
+
+    \subsection{Architectural Requirements \& Design (rem)}
 
     \paragraph{}
     The System consists of three subsystems, namely the \textit{Mobile App}, the
@@ -250,5 +288,17 @@
             \label{deploymentdiagram}
         \end{figure}
     \end{center}
+
+    \subsection{Interfaces (todo)}
+
+    User (purpose), hardware (OS, drivers), software (APIs)\ldots
+
+    \subsection{Styles (todo)}
+
+    Type and style of each subsystem (and system as a whole)\ldots
+
+    \subsection{Configuration (todo)}
+
+    Deployment diagram\ldots
 
 \end{document}
