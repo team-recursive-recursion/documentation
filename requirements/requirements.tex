@@ -146,71 +146,124 @@
 
     \section{Functional Requirements} 
 
-    \subsection{Users (todo)}
+    \subsection{Users}
 
-    \subsection{Subsystems (todo)}
+    The system contains two different users, listed below. Further details
+    about functions that each user will perform are stipulated in Section
+    \ref{sec:requirements}.
 
-    The product has two user interfaces, namely the website and the mobile
-    application. The map that is displayed on the both the website and the
-    mobile application is created using the Google Maps API. An API shall be
-    created to make database manipulation easier.\\ The mobile application is
-    light weight on processing and memory usage since it is only used to view
-    the map and do minor calculations such as distance calculation.
+    \begin{itemize}
+        \item \textbf{Manager:} These users are golf course managers or owners
+            that use the web application. They primarily create or edit golf
+            courses and view the positions of active players on the map.
+        \item \textbf{Player:} These users are golf players that use the mobile
+            application, primarily to view the course. These users are
+            anonymous and do not require any authentication to access the
+            application.
+    \end{itemize}
+
+    \subsection{Subsystems (dia)}
+
+    The system is composed of three subsystems, listed below. Further details
+    about functions that each subsystem will perform are stipulated in Section
+    \ref{sec:requirements}.
+
+    \begin{itemize}
+        \item \textbf{Mobile Application:} This subsystem comprises of a native
+            Android mobile application that is used to view mapped courses and
+            other relative information. The Google Maps API will be used for
+            displaying the map received through the Mapper API, described
+            below.
+        \item \textbf{Web Application:} This subsystem comprises of in
+            interactive web application for creating, mapping and editing
+            courses, as well as viewing the location of currently active
+            players. Again the Google Maps API will be used for drawing the map
+            elements which are loaded and saved using the Mapper API.
+        \item \textbf{Mapper API:} This subsystem covers the backend of the
+            system. This subsystem further contains the following two
+            subsystems:
+            \subitem \textbf{DBMS:} A PostgreSQL installation with the PostGIS
+            extension, used to store all information relevant information.
+            \subitem \textbf{API:} A REST API using the Microsoft .NET Core
+            Entity Framework, which will grant simple and secure access to the
+            information stored in the database.
+    \end{itemize}
 
     Component diagram\ldots
 
-    \subsection{Specific Requirements (exp)}
+    \subsection{Specific Requirements (dia)}
+    \label{sec:requirements}
 
-    The functional requirements describes the functionality that the System
-    provides. It is drawn from user stories that is also, for simplicity's
-    sake, modelled in figure \ref{fig:usecase1}.
+    The following functional requirements describes the functionality that the
+    system will provide. It is drawn from user stories that are also
+    illustrated in sake, modelled in figure \ref{fig:usecase}.
 
     \begin{itemize}
         \item
-            The Manager will register to the Website.
+            \textbf{R1} The manager will register to the website.
         \item
-            The registered Manager will log into the Website.
+            \textbf{R2} The registered manager will log into the Website.
         \item
-            The Manager will create Golf courses.
+            \textbf{R3} The manager will manage courses.
+            \subitem \textbf{R3.1} The manager will create new courses, given a
+            name and a description.
+            \subitem \textbf{R3.2} The manager will remove existing courses.
+            \subitem \textbf{R3.3} The manager will select an existing course
+            to edit.
         \item
-            The Manager will add polygons to the course.
+            \textbf{R4} The manager will control the holes on the course.
+            \subitem \textbf{R4.1} The manager will add new holes to the
+            course.
+            \subitem \textbf{R4.2} The manager will remove existing holes from
+            the course.
+            \subitem \textbf{R4.3} The manager will select an existing hole to
+            edit.
         \item
-            The Manager will load previously created courses.
+            \textbf{R5} The manager will add areas to the active hole/course.
+            \subitem \textbf{R5.1} The manager will choose to add a new area.
+            \subitem \textbf{R5.2} The manager will draw a polygon on the map.
+            \subitem \textbf{R5.3} The manager will select the type of the
+            area.
         \item
-            The Manager will edit courses by drawing extra polygons or removing existing ones.
+            \textbf{R6} The manager will add points to the active hole/course.
+            \subitem \textbf{R6.1} The manager will choose to add a new point.
+            \subitem \textbf{R6.2} The manager will place a point on the map.
+            \subitem \textbf{R6.3} The manager will select the type of the
+            point and optionally enter additional info.
         \item
-        	The Manager will view the map.
+            \textbf{R7} The manager will edit existing elements (areas and
+            points) on the active hole/course.
+            \subitem \textbf{R7.1} The manager will edit a selected element by
+            dragging the component(s) of the element.
+            \subitem \textbf{R7.2} The manager will remove a selected element.
         \item
-            The Player will view the map on the Mobile App.
+            \textbf{R8} The manager will enable the location view, which will
+            display the locations of all current players (using the mobile app)
+            on the course.
         \item
-            The Player will select a course of interest  from a list of existing courses.
+            \textbf{R9} The player will view a course on the mobile app.
+            \subitem \textbf{R9.1} The courses will be listed in order of
+            ascending distance from the player.
+            \subitem \textbf{R9.2} The player will choose a course to view on
+            the map.
+            \subitem \textbf{R9.3} The player will choose a specific hole to
+            view on the selected course.
         \item
-            The Player will view the selected course.
+            \textbf{R10} The player will see his current position displayed on
+            the map.
         \item
-        	The Player will view his position on the map.
+            \textbf{R11} The player will see the distance between their current
+            location and a selected point on the course.
     \end{itemize}
     
-    More diagrams?
+    Activity diagram to show interaction between components.
 
     \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{UsecaseDiagram}
     \caption{Use case Diagram}
-    \label{fig:usecase1}
+    \label{fig:usecase}
     \end{figure}
-
-    \subsection{Product Functions (rem)}
-    The main functions are
-    \begin{enumerate}
-        \item
-            Drawing polygons on a map to represent a golf course
-        \item
-            Displaying the map with the polygons on a mobile device used by
-            golfers.
-        \item
-            Calculate the distance between the player and the hole as well as
-            indicating hazards or  obstacles between the player and the hole.
-    \end{enumerate}
 
     \newpage
 
@@ -242,43 +295,84 @@
 
     \section{Architecture}
 
-    \subsection{Architectural Requirements \& Design (rem)}
 
-    \paragraph{}
-    The System consists of three subsystems, namely the \textit{Mobile App}, the
-    \textit{Website} and the \textit{Back End}. The Back End additionally
-    consists of the \textit{DBMS} and \textit{API} subsystems. The system is
-    designed according to the MVC (Model-View-Controller) architectural pattern.
-    This choice is due to the fact that there is a single database that stores
-    information about the golf courses and that there is more than one type of
-    subsystem that interfaces with users. This allows the MVC pattern to be a
-    good choice since it allows the abstraction of a model from the views, and
-    also protects access to the model by the use of a controller. The
-    abstraction created by the controller also increases the ease of maintaining
-    the connection between the views and the model.
+    \subsection{Interfaces}
 
-    \paragraph{}
-    Figure \ref{deploymentdiagram} shows the deployment diagram of the system and it's
-    subsystems. From here it is easy to identify the different components of the
-    MVC pattern:
+    The next sections each describe the interfaces present in each specific
+    subsystem.
+
+    \subsubsection{Mobile Application (todo)}
 
     \begin{itemize}
-        \item \textbf{Model} - The DBMS serves as the model component by storing
-            the information required by the system. The DBMS is solely and
-            exclusively responsible for the store and retrieval of data,
+        \item \textit{User:} purpose
+        \item \textit{Google Maps API:} purpose
+        \item \textit{Mapper API:} purpose
+    \end{itemize}
+
+    \subsubsection{Web Application (todo)}
+
+    \begin{itemize}
+        \item \textit{User:} purpose
+        \item \textit{Google Maps API:} purpose
+        \item \textit{Mapper API:} purpose
+    \end{itemize}
+
+    \subsubsection{Mapper API (todo)}
+
+    \begin{itemize}
+        \item \textit{API/DBMS:} purpose
+        \item \textit{Network:} purpose
+    \end{itemize}
+
+    \subsection{Styles}
+
+    \subsubsection{System Architecture}
+    
+    The system is designed according to the MVC (Model-View-Controller)
+    architectural pattern. This pattern is a good choice for the system as
+    there is a single database responsible for storing information regarding
+    mapped courses and there are multiple views that users interface with.
+    
+    The MVC pattern allows the abstraction of the model from the views, and
+    also protects access to the model by the use of a controller. The
+    abstraction created by the controller also increases the ease of
+    maintaining the connection between the views and the model.
+
+    Figure \ref{deploymentdiagram} shows the deployment diagram of the system
+    and its subsystems. The different components of the MVC pattern are then
+    listed as follows:
+
+    \begin{itemize}
+        \item \textbf{Model} - The DBMS serves as the model component by
+            storing the information required by the system. The DBMS is solely
+            and exclusively responsible for the storage and retrieval of data,
             as well as enforcing integrity rules on the dataset.
-        \item \textbf{Views} - The Mobile App and Website both serve as two
-            different views. The Website is a view that uses the controller
-            to both create, update and destroy data stored within the model
-            in order to manage the mapping of golf courses. The Mobile App is
-            a simpler view with the sole purpose of fetching and displaying
-            data received from the model via the controller.
+        \item \textbf{Views} - The mobile app and website both serve as two
+            different views. The website is a view that uses the controller to
+            both create, update and destroy data stored within the model in
+            order to manage the mapping of courses. The mobile app is a simpler
+            view with the sole purpose of fetching and displaying data received
+            from the model via the controller.
         \item \textbf{Controller} - The API serves as the controller. It acts
             as a level of abstraction between the model and the views by
             controlling the access to the model.
     \end{itemize}
 
-    \paragraph{}
+    \subsubsection{Mobile Application (todo)}
+
+    \ldots
+
+    \subsubsection{Web Application (todo)}
+
+    \ldots
+
+    \subsubsection{Mapper API (todo)}
+
+    \ldots
+
+    \subsection{Configuration (todo)}
+
+    Deployment diagram\ldots
 
     \begin{center}
         \begin{figure}[h]
@@ -288,17 +382,5 @@
             \label{deploymentdiagram}
         \end{figure}
     \end{center}
-
-    \subsection{Interfaces (todo)}
-
-    User (purpose), hardware (OS, drivers), software (APIs)\ldots
-
-    \subsection{Styles (todo)}
-
-    Type and style of each subsystem (and system as a whole)\ldots
-
-    \subsection{Configuration (todo)}
-
-    Deployment diagram\ldots
 
 \end{document}
