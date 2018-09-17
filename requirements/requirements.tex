@@ -301,12 +301,23 @@
     The next sections each describe the interfaces present in each specific
     subsystem.
 
-    \subsubsection{Mobile Application (todo)}
+    \subsubsection{Mobile Application}
 
     \begin{itemize}
-        \item \textit{User:} purpose
-        \item \textit{Google Maps API:} purpose
-        \item \textit{Mapper API:} purpose
+        \item \textit{User:} The mobile application interfaces with the user
+            through the mobile device's screen. The user's input is used to
+            navigate the map and choose holes to view. The user is also
+            presented with a map displaying the course and additional info.
+        \item \textit{Network:} The application interfaces with the networking
+            devices of the mobile device. Network connection is required to use
+            the both the Mapper and Google Maps APIs.
+        \item \textit{Mapper API:} The Mapper API is used to receive
+            information on mapped courses, which is then displayed to the user.
+        \item \textit{Google Maps API:} In order to display the information
+            obtained from the Mapper API, the Google Maps API is used. The API
+            allows the map to be displayed and displays the polygons and points
+            on the map. The user's location is also obtained through the same
+            API.
     \end{itemize}
 
     \subsubsection{Web Application (todo)}
@@ -358,17 +369,9 @@
             controlling the access to the model.
     \end{itemize}
 
-    \subsubsection{Mobile Application (todo)}
-
-    \ldots
-
-    \subsubsection{Web Application (todo)}
-
-    \ldots
-
     \subsubsection{Mapper API (todo)}
 
-    \ldots
+    Blackboard? \ldots
 
     \subsection{Configuration (todo)}
 
