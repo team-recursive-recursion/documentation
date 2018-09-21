@@ -162,7 +162,7 @@
             application.
     \end{itemize}
 
-    \subsection{Subsystems (dia)}
+    \subsection{Subsystems}
 
     The system is composed of three subsystems, listed below. Further details
     about functions that each subsystem will perform are stipulated in Section
@@ -189,9 +189,9 @@
             information stored in the database.
     \end{itemize}
 
-    Component diagram\ldots
+    % TODO component diagram
 
-    \subsection{Specific Requirements (dia)}
+    \subsection{Specific Requirements}
     \label{sec:requirements}
 
     The following functional requirements describes the functionality that the
@@ -256,7 +256,7 @@
             location and a selected point on the course.
     \end{itemize}
     
-    Activity diagram to show interaction between components.
+    % TODO activity diagram
 
     \begin{figure}[h]
     \centering
@@ -269,32 +269,39 @@
 
     %===========================================================================
 
-    \section{Non-Functional Requirements (todo)}
+    \section{Non-Functional Requirements}
 
-    Why, how and measures\ldots
+    The following sections each describe different non-functional requirements
+    and briefly explain how these requirements are tested.
 
-    \subsection{Performance Requirements (exp)}
-    \begin{itemize}
-        \item
-            The system shall be responsive.
-        \item
-            The system shall use the Google Maps API sparingly to reduce run
-            cost.
-    \end{itemize}
+    \subsection{Performance Requirements}
 
-    \subsection{Usability Requirements (exp)}
+    The system must be optimized to make as few Google Maps API calls as
+    possible. The Google Maps API allows 25000 calls per day, after which the
+    calls are billed.
 
-    The product is very simple to use for anyone that has ever had any
-    experience working with Google Maps.\\ All icons and user interfaces are
-    designed to be as intuitive as possible. This removes the need of a detailed
-    tutorial on how to use the system.
+    The performance is testing using stress testing, as layed out in the
+    \textit{Testing Policy}.
+
+    \subsection{Usability Requirements}
+
+    Both the mobile application and web application must be made as user friendly
+    as possible. The users of the system will mostly have little to no technical
+    background, therefore the system must be intuitive to use.
+
+    A tutorial video must also be provided to ensure that users can have a brief
+    introduction to the system.
+
+    Usability is tested through usability tests, as explained in the
+    \textit{Testing Policy}. Briefly, this is done by presenting the web
+    application or mobile application to different users, having them use the
+    system and providing feedback at the end of the session.
 
     \newpage
 
     %===========================================================================
 
     \section{Architecture}
-
 
     \subsection{Interfaces}
 
@@ -320,24 +327,40 @@
             API.
     \end{itemize}
 
-    \subsubsection{Web Application (todo)}
+    \subsubsection{Web Application}
 
     \begin{itemize}
-        \item \textit{User:} purpose
-        \item \textit{Google Maps API:} purpose
-        \item \textit{Mapper API:} purpose
+        \item \textit{User:} The web application interfaces with the user
+            through the browser's display. The user is presented with various
+            controls and UI elements that are used to edit courses. The user is
+            also presented with a satellite map for displaying and drawing
+            courses, as well as active player's locations.
+        \item \textit{Mapper API:} The Mapper API is used to receive
+            information on mapped courses, which is then displayed to the user.
+            The mapper API is also used to create, modify or delete existing
+            courses, holes or map elements.
+        \item \textit{Google Maps API:} In order to display the information
+            obtained from the Mapper API, the Google Maps API is used. The API
+            allows the satellite map to be displayed and displays the polygons
+            and points on the map. The API is also used to draw the elements on
+            the map. 
     \end{itemize}
 
-    \subsubsection{Mapper API (todo)}
+    \subsubsection{Mapper API}
 
     \begin{itemize}
-        \item \textit{API/DBMS:} purpose
-        \item \textit{Network:} purpose
+        \item \textit{API/DBMS:} The API and the DBMS interface with one another
+            through the server's internal network. The API connects to the DBMS in
+            order to execute queries to create, receive, update or delete data.
+        \item \textit{Network:} The API interfaces with the networking devices of
+            the server. Network connection is required in order to communicate with
+            the views, as explained in Section \ref{sec:sysarch}.
     \end{itemize}
 
     \subsection{Styles}
 
     \subsubsection{System Architecture}
+    \label{sec:sysarch}
     
     The system is designed according to the MVC (Model-View-Controller)
     architectural pattern. This pattern is a good choice for the system as
@@ -369,20 +392,31 @@
             controlling the access to the model.
     \end{itemize}
 
-    \subsubsection{Mapper API (todo)}
+    %\subsubsection{Mapper API Architecture}
 
-    Blackboard? \ldots
+    %Blackboard? \ldots
 
-    \subsection{Configuration (todo)}
+    \subsection{Configuration}
 
-    Deployment diagram\ldots
+    The Web Application and Mapper API will both be hosted on a Microsoft Azure
+    Web Server. This includes the PostgreSQL DBMS, .NET Core Entity Framework
+    and the Angular web service.
+
+    The mobile app will be available on the Google Play Store for download on
+    any mobile device that hosts an Android system above version 4.4 (KitKat).
+    Finally, the web application will be available through a public URL that
+    can be accessed by any course managers that wish to use the web
+    application.
+
+    The deployment diagram in figure \ref{fig:depdia} illustrates the
+    configuration of the system.
 
     \begin{center}
         \begin{figure}[h]
             \centering
             \includegraphics[scale=0.9]{DeploymentDiagram}
             \caption{Deployment diagram}
-            \label{deploymentdiagram}
+            \label{fig:depdia}
         \end{figure}
     \end{center}
 
