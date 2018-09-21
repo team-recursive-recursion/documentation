@@ -32,7 +32,8 @@
     \pagenumbering{arabic}
 
     
-    
+    \tableofcontents
+    \newpage
 	\section{System Overview}    
 	\paragraph{}
 	The project will allow golf course owners/managers to draw their golf course using the provided web application. While drawing the golf course, details about the map can be added, such as locations of the hole, green, fairway, or any obstacles and hazardous areas.
@@ -43,11 +44,17 @@ Golf players will be able to view the map via their Android phones, enabling the
 	 \includegraphics[scale=0.25]{sys-conf-diagram.jpg}
 	\paragraph{•}
 	  The website and the mobile application connects to the server to retrieve data. An Internet connection is needed to load the map on both the web and mobile application. It is recommended to have Android 4.4 or later for the mobile application. The latest version of Internet Explorer, Google Chrome or Mozilla Firefox is recommended.
+	  
+	  \section{Installation}
+	
+	  \paragraph{•}
+	  Website: The website is installed on a server but the source code can be cloned from github and can run with: ng serve.
+	  Mobile App: The app can be found on the Google Play store, just click on the install button and launch the application.
 	
 	\section{Getting Started}
 	\paragraph{•}
 	
-	Website: To access the website go to the URL (http://localhost:5000/).If this is your first time using the website, please register your credentials. If you have used the website before login with your credential that you used to register. 
+	Website: To access the website go to the URL (http://localhost:4200/).If this is your first time using the website, please register your credentials. If you have used the website before login with your credential that you used to register. 
 	
 	Mobile Application: To access the mobile application press on the application on a mobile device.
 	\section{Using the System}
@@ -58,7 +65,7 @@ Golf players will be able to view the map via their Android phones, enabling the
     Figure 1.
 	\subsubsection{Register}
 	\paragraph{•}
-	To register for the website, type in your credentials in the text boxes as seen in figure 1. The fields are Email, First Name, Last Name, Password and Confirm Password. After your details have been entered, click on the Register button to register.
+	The first time you use the website you must register. To register for the website, type in your credentials in the text boxes as seen in figure 1. The fields are Email, First Name, Last Name, Password and Confirm Password. After your details have been entered, click on the Register button to register. A message will show that you successfully registered and can now use the website. If you receive an error, see the troubleshooting section.
 	
 		
 	
@@ -67,7 +74,7 @@ Golf players will be able to view the map via their Android phones, enabling the
     Figure 2.
 	\subsubsection{Login}
 	\paragraph{•}
-	After you have successfully registered your credentials (see 4.1 for more details). Type in the same Email and Password that you registered with, click on the Login button to login. As seen in figure 2.
+	The next step when wanting to use the website. After you have successfully registered your credentials (see 4.1 for more details). Type in the same Email and Password that you registered with, click on the Login button to login. As seen in figure 2. The website will now log you in and you can now use the website to map a gold course.
 	
     \subsection{Website}
     \includegraphics[scale=0.4]{map}
@@ -76,7 +83,7 @@ Golf players will be able to view the map via their Android phones, enabling the
     
 	\subsubsection{Select a Golf Course}    
 	\paragraph{•}    
-	To select a course click on the "Select a course" text as shown in Figure 3. A drop down menu will appear with all the available course. Click on the desired course to load the course onto the map.    
+	To load a course click on the "Select a course" text as shown in Figure 3. A drop down menu will appear with all the available course. Click on the desired course to load the course onto the map. You would want to do this if you want to load and edit a previous course.
     
     
     \subsubsection{Create Golf Course}
@@ -85,7 +92,7 @@ Golf players will be able to view the map via their Android phones, enabling the
 	
 	\subsubsection{Search Golf Course}
 	\paragraph{•}    
-    Type in a name of a location to search it on the map.
+    Type in a name of a location to search it on the map. This function is used to find a golf course on Google maps that you want to edit and save. This is used to find a desired golfcourse. After searching the map will move to that location.
     
     \includegraphics[scale=0.4]{map1}
     \paragraph{•}
@@ -93,7 +100,7 @@ Golf players will be able to view the map via their Android phones, enabling the
     
     \subsubsection{Create a Hole}
     \paragraph{•}
-    Type in the name of the hole in the "Hole Name" text box. Click on the "+" icon to create the hole.
+    Type in the name of the hole in the "Hole Name" text box. Click on the "+" icon to create the hole. Use this option when you want to add another golfhole to the golfcourse.
     
     \subsubsection{Select a Hole}
     \paragraph{•}
@@ -101,7 +108,7 @@ Golf players will be able to view the map via their Android phones, enabling the
     
     \subsubsection{Delete an Element}
     \paragraph{•}
-    To delete an element click on the element and then click on the red trash can icon. The selected element will now be deleted.
+    To delete an element click on the element and then click on the red trash can icon. The selected element will now be deleted. Use this option when you placed an element incorrectly and want to remove/delete it.
     
     \subsubsection{Place a Marker}
 	\paragraph{•}
@@ -153,6 +160,22 @@ Golf players will be able to view the map via their Android phones, enabling the
 	
 	\paragraph{•}
 	Press on the Courses item in the bottom navigation bar to view to available courses as shown in Figure 7. Press on the desired course to view the course. After the course has been chosen, the hole can then be selected as shown in Figure 8
+	
+	\section{Troubleshooting}
+	
+	Q: The page is not loading.
+	\\
+	A: Check that you have an internet connection.
+	\\
+	\\
+	Q: The website is giving a random error
+	\\
+	A: Have you tried turning it off and on again?
+	\\
+	\\
+	Q: In development mode, the website is saying "trusted"=true, what now?
+	\\
+	A: Run the API with dotnet run, the API is available on github
 	
 	
 
