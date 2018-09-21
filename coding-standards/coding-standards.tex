@@ -2,6 +2,8 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
 
 \definecolor{backcolor}{rgb}{0.95, 0.95, 0.95}
 
@@ -136,16 +138,17 @@
     \label{sec:web-app}
 
     This section describes the coding standards applied to the \texttt{web-app}
-    repository. The system design of the subsystem is illustrated in Section
-    \ref{sec:wa-design} and the file structure of the repository is explained in
+    repository. %The system design of the subsystem is illustrated in Section
+    %\ref{sec:wa-design} and
+    The file structure of the repository is explained in
     Section \ref{sec:wa-struc}. The web application makes use of TypeScript,
     HTML and CSS. The standards for these languages are described in Sections
     \ref{sec:typescript} and \ref{sec:html-css}.
 
-    \subsection{System Design}
-    \label{sec:wa-design}
+    %\subsection{System Design}
+    %\label{sec:wa-design}
 
-    UML class diagram coming soon\ldots
+    %UML class diagram coming soon\ldots
 
     \subsection{File Structure}
     \label{sec:wa-struc}
@@ -153,7 +156,7 @@
     The repository contains a \texttt{WebApplication/} folder at the root which
     contains the source files of the subsystem. This folder was created through
     the Angular CLI, and are therefore organized according to the standard
-    Angular layout [??].
+    Angular layout.
 
     The most important folder is the \texttt{src/} folder, which contains the
     following notable locations:
@@ -368,14 +371,19 @@ more {
     \subsection{System Design}
     \label{sec:ma-design}
 
-    UML class diagram coming soon\ldots
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.4]{MobileClassDiagram}
+        \caption{UML Class Diagram of the Mobile Application}
+        \label{fig:mobuml}
+    \end{figure}
 
     \subsection{File Structure}
     \label{sec:ma-struc}
 
     The root of the repository contains the \textit{Android Studio} project
     folder and is therefore organized according to the standard \textit{Android
-    Studio} layout [??].
+    Studio} layout.
 
     \subsection{Java Standards}
     \label{sec:java}
@@ -489,26 +497,27 @@ ReturnType function(ParType1 p1, ParType2 p2) {
     \label{sec:mapper-api}
 
     This section describes the coding standards applied to the
-    \texttt{mapper-api} repository. The system design of the subsystem is
-    illustrated in Section \ref{sec:api-design} and the file structure of the
+    \texttt{mapper-api} repository.% The system design of the subsystem is
+    %illustrated in Section \ref{sec:api-design} and 
+    The file structure of the
     repository is explained in Section \ref{sec:api-struc}. The API makes use of
     C\#. The standards for the C\# language are described in Section
     \ref{sec:cs}.
 
-    \subsection{System Design}
-    \label{sec:api-design}
+    %\subsection{System Design}
+    %\label{sec:api-design}
 
-    UML class diagram coming soon\ldots
+    %UML class diagram coming soon\ldots
 
     \subsection{File Structure}
     \label{sec:api-struc}
 
     The root of the repository contains the \texttt{Test} and \texttt{MapperApi}
     folders. The \texttt{Test} folder contains all the Unit Test files as
-    described further in the \textit{Testing Policy Document} [??]. The
+    described further in the \textit{Testing Policy Document}. The
     \texttt{MapperApi} folder is the \textit{Entity Framework Core} project
     folder and is therefore organized according to the standard \textit{Entity
-    Framework Core} file layout [??].
+    Framework Core} file layout.
 
     \subsection{C\# Standards}
     \label{sec:cs}
