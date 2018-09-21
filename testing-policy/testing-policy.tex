@@ -1,99 +1,234 @@
-\documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
+\documentclass{article}
 
-\author{Team Recursive Recursion}
-\date{\today}
-\title{COS 301 Testing Policy Document}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\definecolor{backcolor}{rgb}{0.95, 0.95, 0.95}
+
+\lstdefinestyle{codestyle} {
+    backgroundcolor=\color{backcolor}
+}
+
+\lstset{style=codestyle}
+
+\title{
+    Testing Policy\\
+    \begin{large}
+        \textit{Golf Course Mapper}
+    \end{large}
+}
+\date{
+    \begin{small}
+        \today
+    \end{small}
+}
+\author{
+    Team Recursive Recursion
+}
+
 \begin{document}
-\maketitle
-%\tableofcontents
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+    \pagenumbering{arabic}
+    
+    \tableofcontents
+    \newpage
 
-\section{Definitions}
+    %===========================================================================
 
-\subsection{Testing as a whole}
-Testing refers to the act of making sure software is reliable, bug resistant and
-satisfies the defined criteria of the component under scrutiny.
+    \section{Introduction}
+    \label{sec:intro}
 
-\section{System Structure and what to test for}
+    \subsection{Purpose}
+    \label{sec:purp}
 
-\subsection{Repository testing}
-A repository refers to a decision based system that decides how to interact with models by
-invoking either a data access object system or requesting another system to
-provide it with the requested data.
+    This \textit{Testing Policy Document} is intended to be a guide on the
+    testing procedure, tools and practices that are followed when working on the
+    \textit{Golf Course Mapper} project. The remainder of this section describes
+    the different repositories used within the project and the remainder of this
+    document then continues to describe the testing policies applied to each
+    individual repository, excluding the documentation repository.
 
-\subsubsection{Argument testing}
-\label{sec:org02bde11}
-Components that take input needs to test the input provided, If the input
-does not fit in the argument domain an argument exception should be present. 
-Invalid arguments should be tested for in a Theory approach providing a list
-of test criteria and iterating through them.
+    \subsection{Repositories Structure}
+    \label{sec:reps}
 
-\subsubsection{Result testing}
-Result testing implies a correct argument domain. The resulting artefact of
-system should be tested against an expected artefact. All the properties
-individually should be tested against the expected values if the object as a
-whole cannot be compared in an extensive manner.
+    There are four (4) repositories that are used for the project:
+    \texttt{web-app}, \texttt{mobile-app}, \texttt{mapper-api} and
+    \texttt{documentation}. A short description of the contents of each
+    repository is listed below.
 
-\subsection{Controller Testing}
-Controller testing refers to testing on a system that can do things with a
-data model. This include updating and inserting items to name a few functions.
+    \begin{itemize}
+        \item \texttt{web-app}
+            \subitem Contains web application subsystem used for mapping and
+            managing golf courses. The web application is built using
+            \textit{Angular 6}.
+        \item \texttt{mobile-app}
+            \subitem Contains the \textit{Android} app used for viewing golf
+            courses. The mobile app is built using native Java code.
+        \item \texttt{mapper-api}
+            \subitem Contains the \textit{Entity Framework Core} API used to
+            manage and provide access to the database. The database used is
+            \textit{PostGIS}, an extention of \textit{PostgreSQL}.
+        \item \texttt{documentation}
+            \subitem Contains all documentation relating to the project,
+            including this file. Documents are written in \LaTeX. The repository
+            also contains all additional images and published PDF versions of
+            the documents.
+    \end{itemize}
 
-\subsubsection{Relational testing}
-Tests should always exist if an object is created that is referenced by
-another object within a model. This should happen in a bi-directional
-manner to ensure referential integrity.
+    \newpage
 
-\subsubsection{Object integrity testing}
-Tests should be in place to verify the integrity of an object before and
-after a change have been made on a persistence storage system to verify that
-the object have indeed been correctly stored.
+    %===========================================================================
 
-\subsection{View Testing}
-Views should be able to handle any length and state of the system, thus size
-and quantity of objects that the view can accurately display without ambiguity should be tested.
+    \section{Testing Process}
+    \label{sec:process}
 
-\subsubsection{Error handling}
-Any error or exception that the controller can return should be tested for.
-This is not limited to status errors and should be descriptive. View testing
-can only be complete if all possible end states of the system in handled.
+    The following describes the process that is followed when testing code. The
+    process described is the same for all repositories.
 
-\section{Test implementation structure}
-Tests should follow a structured implementation.
+    \subsection{Targets}
+    \label{sec:targets}
 
-\subsection{Assign}
-In this section all possible variables that will be needed to test the
-component in question should be created. Test separation is of importance in
-the sense that the objects created in this phase should react as expected. If
-the object that is created in this section can be tested, it should be in a
-distinct test case as only one component should be tested per test. 
+    The following tests are performed to ensure that the system is operating
+    correctly and satisfies the functional requirements, as outlined in the
+    \textit{Software Requirements Specification} (SRS).
 
-\subsection{Action}
-In this fragment of a test, the object under scrutiny should be created. The
-creation process should then return an object that will be tested against
-expected values. This includes storing exceptions as all tests should pass to view code as working. 
+    \begin{itemize}
+        \item \textit{Unit Tests} are performed to ensure that individual
+            functions and components of each system component performs
+            correctly.
+        \item \textit{Integration Tests} are performed to ensure that the
+            different subsystems operate correctly. This is further described
+            in Section \ref{sec:mapper-api}.
+        \item \textit{Acceptance Tests} are performed along with the client to
+            ensure that the system meets the client's requirements and
+            expectations.
+    \end{itemize}
 
-\subsection{Assert}
-Assertion should be set up in a fashion to extensively evaluate the artefact
-created by an action. The artefact can be an error and in that case the
-specific error should be asserted with the expected parameter. This
-reiterates that each test only tests one aspect of a object created through
-an action.
+    The following tests are performed to ensure that the system complies with
+    the non-functional system requirements, as outlined in the SRS.
 
-\section{Test Procedure}
-Following a Test Driven Development methodology improves the effectiveness of the coding process. It can eliminate bugs at an early stage of development and can guide the development process.
+    \begin{itemize}
+        \item \textit{Stress Testing} is performed on the API to ensure
+            that it meets the performance requirements.
+        \item \textit{Usability Testing} is performed to receive feedback on
+            the UI design of the web and mobile applications. This also ensures
+            that the UI is as user-friendly as possible.
+    \end{itemize}
 
-\subsection{Testing}
-\begin{enumerate}
-	\item
-	Produce a skeleton of the class you want to implement. Each function has an empty body or returns a default value such as an empty string or null. As development proceeds the skeleton is expanded into the end product.
-	\item
-	Select a feature you want to implement. Usually features of high priority are implemented first. Which feature to implement next is also dependent on the flow of data and processing. If one function (say f1) uses results of another function (say f2) then f2 needs to be implemented before f1. The same logic is followed if f1 makes a call to f2.
-	\item
-	Create tests for the feature. Remember to cover all branches. If a feature branches based on some criteria into an if-else or a number of if-else blocks then tests should cover all the branches.\\
-	Implement and test the feature. Edit the code and the tests according to need until the feature passes all the tests while complying to all testing standards.
-	\item
-	Repeat this process until all features are implemented.
-	\item
-	Make sure that the tests cover the whole class.
-\end{enumerate}
+    \subsection{Procedure}
+    \label{sec:procedure}
+
+    \paragraph{Unit tests} must be written and passed before code can be merged
+    to the \texttt{master-dev} branch. This ensures that code on the dev branch
+    is at least functionally correct. For details on how unit tests are
+    performed for the mobile app and Mapper API, see the sections
+    \ref{sec:mobile-app} and \ref{sec:mapper-api}, respectively.
+
+    \paragraph{Integration tests} must be passed before code can be merged to
+    the \texttt{master} branch. This ensures that code on the master branch is
+    always in a usable state. For details on how integration tests are
+    performed, see Section \ref{sec:mapper-api}.
+
+    \paragraph{Acceptance tests} are performed monthly with the clients to
+    verify that the system complies with their requirements.
+
+    \newpage
+
+    %===========================================================================
+
+    \section{Web App Testing}
+    \label{sec:web-app}
+
+    This section describes the testing policies adopted in the \texttt{web-app}
+    repository. Being a subsystem that mainly acts as a frontend, only
+    usability tests are performed. The history of the tests are shown in
+    Section \ref{sec:wa-hist}.
+
+    \subsection{Usability Testing}
+    \label{sec:wa-tools}
+
+    In order to satisfy the usability requirement of the system, it is
+    necessary to perform a usability test to ensure that the system is
+    user-friendly enough to non-technical users. A formal usability test is
+    performed, asking testers to perform specific tasks on the system.
+    
+    Testers are then asked to provide critical feedback on the system, which is
+    then analyzed. The results are then used to identify key issues in the
+    design of the user interface.
+
+    \subsection{History}
+    \label{sec:wa-hist}
+
+    Figure \ref{fig:usability} illustrates the usability test performed on 20
+    September, 2018. Six testers from various backgrounds were asked to perform
+    a serious of tasks on the web application, without any prior introduction
+    to the user interface. The testers were then given a form to fill out,
+    asking them to provide any feedback.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.55]{UsabilityTest}
+        \caption{Usability test in progress}
+        \label{fig:usability}
+    \end{figure}
+
+    \newpage
+    
+    %===========================================================================
+
+    \section{Mobile App Testing}
+    \label{sec:mobile-app}
+
+    This section describes the testing policies adopted in the \texttt{web-app}
+    repository. The tools used for testing are described in Section
+    \ref{sec:ma-tools}.  The layout of the test cases and history of the tests
+    are shown respectively in Sections \ref{sec:ma-cases} and \ref{sec:ma-hist}.
+
+    \subsection{Tools}
+    \label{sec:ma-tools}
+
+    What tool, justify choice and give configuration details (how to use)\ldots
+
+    \subsection{Test Cases}
+    \label{sec:ma-cases}
+
+    Where (folder) are the tests located\ldots
+
+    \subsection{History}
+    \label{sec:ma-hist}
+
+    Screenshots\ldots
+
+    \newpage
+
+    %===========================================================================
+
+    \section{Mapper API Testing}
+    \label{sec:mapper-api}
+
+    This section describes the testing policies adopted in the \texttt{web-app}
+    repository. The tools used for testing are described in Section
+    \ref{sec:api-tools}.  The layout of the test cases and history of the tests
+    are shown respectively in Sections \ref{sec:api-cases} and
+    \ref{sec:api-hist}.
+
+    \subsection{Tools}
+    \label{sec:api-tools}
+
+    What tool, justify choice and give configuration details (how to use)\ldots
+
+    \subsection{Test Cases}
+    \label{sec:api-cases}
+
+    Where (folder) are the tests located\ldots
+
+    \subsection{History}
+    \label{sec:api-hist}
+
+    Screenshots\ldots
+
 \end{document}
