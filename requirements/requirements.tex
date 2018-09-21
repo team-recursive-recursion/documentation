@@ -136,7 +136,7 @@
     \begin{figure}[h]
     	\centering
     	\includegraphics[scale=0.5]{DomainModel}
-        \caption{Domain model of the system}
+        \caption{Domain model of the system.}
         \label{fig:domainmodel}
     \end{figure}
 
@@ -166,7 +166,8 @@
 
     The system is composed of three subsystems, listed below. Further details
     about functions that each subsystem will perform are stipulated in Section
-    \ref{sec:requirements}.
+    \ref{sec:requirements}. The component diagram in figure \ref{fig:component}
+    illustrates the subsystems and their relationships.
 
     \begin{itemize}
         \item \textbf{Mobile Application:} This subsystem comprises of a native
@@ -189,14 +190,19 @@
             information stored in the database.
     \end{itemize}
 
-    % TODO component diagram
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.6]{ComponentDiagram}
+        \caption{Component diagram illustrating subsystems.}
+        \label{fig:component}
+    \end{figure}
 
     \subsection{Specific Requirements}
     \label{sec:requirements}
 
     The following functional requirements describes the functionality that the
     system will provide. It is drawn from user stories that are also
-    illustrated in sake, modelled in figure \ref{fig:usecase}.
+    illustrated by the use case diagram in figure \ref{fig:usecase}.
 
     \begin{itemize}
         \item
@@ -258,11 +264,11 @@
     
     % TODO activity diagram
 
-    \begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.6]{UsecaseDiagram}
-    \caption{Use case Diagram}
-    \label{fig:usecase}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.6]{UsecaseDiagram}
+        \caption{Use case diagram illustrating user stories.}
+        \label{fig:usecase}
     \end{figure}
 
     \newpage
@@ -374,7 +380,7 @@
 
     Figure \ref{deploymentdiagram} shows the deployment diagram of the system
     and its subsystems. The different components of the MVC pattern are then
-    listed as follows:
+    listed as the following:
 
     \begin{itemize}
         \item \textbf{Model} - The DBMS serves as the model component by
@@ -392,9 +398,26 @@
             controlling the access to the model.
     \end{itemize}
 
-    %\subsubsection{Mapper API Architecture}
+    \subsubsection{Mapper API Architecture}
 
-    %Blackboard? \ldots
+    The Mapper API is designed as a persistence framework architecture. This
+    architecture is a good choice for the API as it allows the hiding of the
+    specific database implementation from the business objects.
+
+    This also allows the separation of the database access from the actual
+    implementation of the database, which enables easy maintenance, replacement
+    and even distribution of the database. The different compoments of the
+    persistence framework are listed as the following:
+
+    \begin{itemize}
+        \item \textbf{Database} - The DBMS serves as the database which can
+            store business objects (in this case, courses and their elements).
+            The database is solely responsible for persisting objects.
+        \item \textbf{Database Manager} - The API serves as the database
+            manager and controller, which abstracts the implementation of the
+            database by providing a fixed set of functions that can be
+            performed with persisted objects.
+    \end{itemize}
 
     \subsection{Configuration}
 
@@ -412,10 +435,10 @@
     configuration of the system.
 
     \begin{center}
-        \begin{figure}[h]
+        \begin{figure}[h!]
             \centering
             \includegraphics[scale=0.9]{DeploymentDiagram}
-            \caption{Deployment diagram}
+            \caption{Deployment diagram illustrating system configuration.}
             \label{fig:depdia}
         \end{figure}
     \end{center}
