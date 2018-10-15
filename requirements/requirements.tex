@@ -55,22 +55,23 @@
     of the golf course. This includes mapping the layout of the fairway, green,
     sand and water hazards and details such as the position of the hole and the
     teeing grounds. Additionally, owners will be allowed to view their courses
-    and see the locations of active players currently using the mobile
-    application.
+    and see the locations of active players currently using either the Android
+    or iOS mobile applications.
 
     Players currently on the course will be able to use the provided mobile
-    application to view the map of the course and where they are on it
-    currently. This has the benefit of allowing players to plan their shots
+    applications to view the map of the course and their current location on
+    the course. This has the benefit of allowing players to plan their shots
     more strategically. The app will show the distances between the player and
     various points of interest (such as the hole), further aiding the player
     during play.
 
     The Golf Course Mapper is not a coaching tool and does not provide a
-    channel of communication between the mapper and the player. The web
-    application is not to be used by coaches, but solely by managers that wish
-    to map out the details of their courses and view its current state. The
-    Golf Course Mapper is also not a social media platform for golfers and will
-    not allow communication among players.
+    channel of communication between the mapper and the player, nor does it
+    provide any communication between players. The web application is not to be
+    used by coaches, but solely by managers that wish to map out the details of
+    their courses and view its current state. The Golf Course Mapper is also
+    not a social media platform for golfers and will not allow communication
+    among any involved parties.
 
     \subsection{Definitions, Acronyms \& Abbreviations}
     \begin{itemize}
@@ -82,13 +83,16 @@
             refer to the user of the website.
         \item
             Player: A golf player, henceforth used to refer to the users of the
-            mobile application.
+            mobile applications.
         \item
-            Website: A web application that is used by golf course managers
+            Website: The web application that is used by golf course managers
             to draw the layout of their golf courses.
         \item
-            Mobile App: A native Android mobile app that golf players can use to
+            Android App: A native Android mobile app that golf players can use to
             view the golf course.
+        \item
+            iOS App: A native iOS mobile app that golf players can use to view
+            the golf course.
         \item
             Location: A position on the map, modelled using latitude and longitude
             coordinates.
@@ -97,8 +101,8 @@
             Points are represented as a single location on the golf course.
         \item
             Area: Specific areas on the golf course, such as the green or the
-            fairway. Areas consist of an ordered set of locations, forming a
-            polygon.
+            fairway. Areas consist of a cyclically ordered set of locations,
+            forming a polygon.
         \item
             DBMS: Database Management System.
         \item
@@ -130,8 +134,9 @@
     A Course may also optionally have Elements that are not associated with a
     specific Hole. This allows the specification of Elements such as points of
     interest or hazardous areas such as bodies of water that may be important
-    to more than one Hole. It therefore does not make sense to associate these
-    Elements with a specific Hole, but rather with the Course as a whole.
+    to or span more than one Hole. It therefore does not make sense to
+    associate these Elements with a specific Hole, but rather with the Course
+    as a whole.
     
     \begin{figure}[h]
     	\centering
@@ -155,44 +160,53 @@
     \begin{itemize}
         \item \textbf{Manager:} These users are golf course managers or owners
             that use the web application. They primarily create or edit golf
-            courses and view the positions of active players on the map.
+            courses and view the positions of active players on the map. These
+            users must be registered on the system and must be authenticated
+            before being able to modify or create courses.
         \item \textbf{Player:} These users are golf players that use the mobile
-            application, primarily to view the course. These users are
-            anonymous and do not require any authentication to access the
-            application.
+            applications, primarily to view the course and receive contextual
+            information. These users are anonymous and do not require any
+            authentication to access the application.
     \end{itemize}
 
     \subsection{Subsystems}
 
-    The system is composed of three subsystems, listed below. Further details
+    The system is composed of four subsystems, listed below. Further details
     about functions that each subsystem will perform are stipulated in Section
     \ref{sec:requirements}. The component diagram in figure \ref{fig:component}
     illustrates the subsystems and their relationships.
 
     \begin{itemize}
-        \item \textbf{Mobile Application:} This subsystem comprises of a native
+        \item \textbf{Android App:} This subsystem comprises of a native
             Android mobile application that is used to view mapped courses and
-            other relative information. The Google Maps API will be used for
-            displaying the map received through the Mapper API, described
+            other contextual information. The Google Maps API will be used for
+            displaying the map received through the Zoning API, described
+            below.
+        \item \textbf{iOS App:} This subsystem comprises of a native iOS mobile
+            application that is used to view mapped courses and other
+            contextual information. The Google Maps API will be used for
+            displaying the map received through the Zoning API, described
             below.
         \item \textbf{Web Application:} This subsystem comprises of in
             interactive web application for creating, mapping and editing
             courses, as well as viewing the location of currently active
-            players. Again the Google Maps API will be used for drawing the map
-            elements which are loaded and saved using the Mapper API.
-        \item \textbf{Mapper API:} This subsystem covers the backend of the
+            players. The Google Maps API will be used for drawing the map
+            elements which are loaded and saved using the Zoning API, described
+            below.
+        \item \textbf{Zoning API:} This subsystem covers the backend of the
             system. This subsystem further contains the following two
             subsystems:
             \subitem \textbf{DBMS:} A PostgreSQL installation with the PostGIS
-            extension, used to store all information relevant information.
+            extension, used to persist any mapping elements and other related
+            information.
             \subitem \textbf{API:} A REST API using the Microsoft .NET Core
             Entity Framework, which will grant simple and secure access to the
-            information stored in the database.
+            information stored in the DBMS.
     \end{itemize}
 
     \begin{figure}[h!]
         \centering
-        \includegraphics[scale=0.6]{ComponentDiagram}
+        \includegraphics[scale=0.45]{ComponentDiagram}
         \caption{Component diagram illustrating subsystems.}
         \label{fig:component}
     \end{figure}
@@ -216,26 +230,34 @@
             \subitem \textbf{R3.2} The manager will remove existing courses.
             \subitem \textbf{R3.3} The manager will select an existing course
             to edit.
+            \subitem \textbf{R3.4} The manager will change the name and
+            description of an existing course.
         \item
             \textbf{R4} The manager will control the holes on the course.
             \subitem \textbf{R4.1} The manager will add new holes to the
-            course.
+            course, given a name and the par of the hole.
             \subitem \textbf{R4.2} The manager will remove existing holes from
             the course.
             \subitem \textbf{R4.3} The manager will select an existing hole to
             edit.
+            \subitem \textbf{R4.4} The manager will change the name and
+            description of an existing hole.
         \item
             \textbf{R5} The manager will add areas to the active hole/course.
             \subitem \textbf{R5.1} The manager will choose to add a new area.
             \subitem \textbf{R5.2} The manager will draw a polygon on the map.
             \subitem \textbf{R5.3} The manager will select the type of the
             area.
+            \subitem \textbf{R5.4} The manager will have the option to abandon
+            the creation of the area.
         \item
             \textbf{R6} The manager will add points to the active hole/course.
             \subitem \textbf{R6.1} The manager will choose to add a new point.
             \subitem \textbf{R6.2} The manager will place a point on the map.
             \subitem \textbf{R6.3} The manager will select the type of the
             point and optionally enter additional info.
+            \subitem \textbf{R6.4} The manager will have the option to abandon
+            the creation of the point.
         \item
             \textbf{R7} The manager will edit existing elements (areas and
             points) on the active hole/course.
@@ -244,22 +266,30 @@
             \subitem \textbf{R7.2} The manager will remove a selected element.
         \item
             \textbf{R8} The manager will enable the location view, which will
-            display the locations of all current players (using the mobile app)
-            on the course.
+            display the locations of all current players (using the mobile
+            apps) on the course.
         \item
             \textbf{R9} The player will view a course on the mobile app.
-            \subitem \textbf{R9.1} The courses will be listed in order of
-            ascending distance from the player.
-            \subitem \textbf{R9.2} The player will choose a course to view on
+            \subitem \textbf{R9.1} The player will see a list of courses
+            ordered by ascending distance from the player.
+            \subitem \textbf{R9.2} The player will search for the name of a
+            specific course.
+            \subitem \textbf{R9.3} The player will choose a course to view on
             the map.
-            \subitem \textbf{R9.3} The player will choose a specific hole to
+            \subitem \textbf{R9.4} The player will choose a specific hole to
             view on the selected course.
         \item
             \textbf{R10} The player will see his current position displayed on
             the map.
         \item
-            \textbf{R11} The player will see the distance between their current
-            location and a selected point on the course.
+            \textbf{R11} The player will se contextual information.
+            \subitem \textbf{R11.1} The player will see the distance between their
+            current location and the current hole's flag.
+            \subitem \textbf{R11.2} The player will see the name of the golf club
+            that is recommended for the distance to the current hole's flag.
+            \subitem \textbf{R11.3} The player will see the distance between
+            their current location and any point of interest on the course by
+            selecting the point.
     \end{itemize}
     
     % TODO activity diagram
@@ -286,22 +316,35 @@
     possible. The Google Maps API allows 25000 calls per day, after which the
     calls are billed.
 
-    The performance is testing using stress testing, as layed out in the
-    \textit{Testing Policy}.
+    The performance is tested using stress testing, as layed out in the
+    \textit{Testing Policy} [??].
 
     \subsection{Usability Requirements}
 
-    Both the mobile application and web application must be made as user friendly
-    as possible. The users of the system will mostly have little to no technical
-    background, therefore the system must be intuitive to use.
+    Both the mobile applications and the web application must be made as user
+    friendly as possible in order to appeal to a large audience. The users of
+    the system will mostly have little to no technical background and must
+    therefore be intuitive to use.
 
     A tutorial video must also be provided to ensure that users can have a brief
     introduction to the system.
 
     Usability is tested through usability tests, as explained in the
-    \textit{Testing Policy}. Briefly, this is done by presenting the web
+    \textit{Testing Policy} [??]. Briefly, this is done by presenting the web
     application or mobile application to different users, having them use the
     system and providing feedback at the end of the session.
+
+    \subsection{Security Requirements}
+
+    The API must be secure and must not allow unauthorized users to modify or
+    remove courses, holes or elements. Furthermore, the API must not allow
+    authorized users to modify courses, holes or elements belonging to a
+    different user. Any user must be able to get read access to the courses,
+    holes and elements and need not be authorized in order to do this. This is
+    because the mobile applications' users are kept anonymous and do not
+    require any identification or authorization.
+
+    Security is tested through\ldots
 
     \newpage
 
