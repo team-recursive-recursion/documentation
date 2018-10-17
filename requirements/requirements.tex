@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
 \graphicspath{ {images/} }
 
 \title{
@@ -138,7 +140,7 @@
     associate these Elements with a specific Hole, but rather with the Course
     as a whole.
     
-    \begin{figure}[h]
+    \begin{figure}[H]
     	\centering
     	\includegraphics[scale=0.5]{DomainModel}
         \caption{Domain model of the system.}
@@ -204,7 +206,7 @@
             information stored in the DBMS.
     \end{itemize}
 
-    \begin{figure}[h!]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.45]{ComponentDiagram}
         \caption{Component diagram illustrating subsystems.}
@@ -294,7 +296,7 @@
     
     % TODO activity diagram
 
-    \begin{figure}[h!]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.6]{UsecaseDiagram}
         \caption{Use case diagram illustrating user stories.}
@@ -317,7 +319,7 @@
     calls are billed.
 
     The performance is tested using stress testing, as layed out in the
-    \textit{Testing Policy} [??].
+    \textit{Testing Policy} [1].
 
     \subsection{Usability Requirements}
 
@@ -330,7 +332,7 @@
     introduction to the system.
 
     Usability is tested through usability tests, as explained in the
-    \textit{Testing Policy} [??]. Briefly, this is done by presenting the web
+    \textit{Testing Policy} [1]. Briefly, this is done by presenting the web
     application or mobile application to different users, having them use the
     system and providing feedback at the end of the session.
 
@@ -357,20 +359,39 @@
     The next sections each describe the interfaces present in each specific
     subsystem.
 
-    \subsubsection{Mobile Application}
+    \subsubsection{Android Application}
 
     \begin{itemize}
-        \item \textit{User:} The mobile application interfaces with the user
+        \item \textit{User:} The Android application interfaces with the user
             through the mobile device's screen. The user's input is used to
             navigate the map and choose holes to view. The user is also
             presented with a map displaying the course and additional info.
         \item \textit{Network:} The application interfaces with the networking
             devices of the mobile device. Network connection is required to use
-            the both the Mapper and Google Maps APIs.
-        \item \textit{Mapper API:} The Mapper API is used to receive
+            both the Zoning and Google Maps APIs.
+        \item \textit{Zoning API:} The Zoning API is used to receive
             information on mapped courses, which is then displayed to the user.
         \item \textit{Google Maps API:} In order to display the information
-            obtained from the Mapper API, the Google Maps API is used. The API
+            obtained from the Zoning API, the Google Maps API is used. The API
+            allows the map to be displayed and displays the polygons and points
+            on the map. The user's location is also obtained through the same
+            API.
+    \end{itemize}
+
+    \subsubsection{iOS Application}
+
+    \begin{itemize}
+        \item \textit{User:} The iOS application interfaces with the user
+            through the Apple device's screen. The user's input is used to
+            navigate the map and choose holes to view. The user is also
+            presented with a map displaying the course and additional info.
+        \item \textit{Network:} The application interfaces with the networking
+            devices of the Apple device. Network connection is required to use
+            both the Zoning and Google Maps APIs.
+        \item \textit{Zoning API:} The Zoning API is used to receive
+            information on mapped courses, which is then displayed to the user.
+        \item \textit{Google Maps API:} In order to display the information
+            obtained from the Zoning API, the Google Maps API is used. The API
             allows the map to be displayed and displays the polygons and points
             on the map. The user's location is also obtained through the same
             API.
@@ -384,26 +405,28 @@
             controls and UI elements that are used to edit courses. The user is
             also presented with a satellite map for displaying and drawing
             courses, as well as active player's locations.
-        \item \textit{Mapper API:} The Mapper API is used to receive
+        \item \textit{Zoning API:} The Zoning API is used to receive
             information on mapped courses, which is then displayed to the user.
-            The mapper API is also used to create, modify or delete existing
+            The Zoning API is also used to create, modify or delete existing
             courses, holes or map elements.
         \item \textit{Google Maps API:} In order to display the information
-            obtained from the Mapper API, the Google Maps API is used. The API
+            obtained from the Zoning API, the Google Maps API is used. The API
             allows the satellite map to be displayed and displays the polygons
             and points on the map. The API is also used to draw the elements on
             the map. 
     \end{itemize}
 
-    \subsubsection{Mapper API}
+    \subsubsection{Zoning API}
 
     \begin{itemize}
-        \item \textit{API/DBMS:} The API and the DBMS interface with one another
-            through the server's internal network. The API connects to the DBMS in
-            order to execute queries to create, receive, update or delete data.
-        \item \textit{Network:} The API interfaces with the networking devices of
-            the server. Network connection is required in order to communicate with
-            the views, as explained in Section \ref{sec:sysarch}.
+        \item \textit{API/DBMS:} The API and the DBMS interface with one
+            another through the server's internal network. The API connects to
+            the DBMS in order to execute queries to create, receive, update or
+            delete data.
+        \item \textit{Network:} The API interfaces with the networking devices
+            of the server. Network connection is required in order to
+            communicate with the views, as explained in Section
+            \ref{sec:sysarch}.
     \end{itemize}
 
     \subsection{Styles}
@@ -421,29 +444,32 @@
     abstraction created by the controller also increases the ease of
     maintaining the connection between the views and the model.
 
-    Figure \ref{deploymentdiagram} shows the deployment diagram of the system
-    and its subsystems. The different components of the MVC pattern are then
-    listed as the following:
+    Figure \ref{fig:depdia} shows the deployment diagram of the system and its
+    subsystems. The different components of the MVC pattern are then following:
 
     \begin{itemize}
         \item \textbf{Model} - The DBMS serves as the model component by
-            storing the information required by the system. The DBMS is solely
-            and exclusively responsible for the storage and retrieval of data,
-            as well as enforcing integrity rules on the dataset.
-        \item \textbf{Views} - The mobile app and website both serve as two
-            different views. The website is a view that uses the controller to
-            both create, update and destroy data stored within the model in
-            order to manage the mapping of courses. The mobile app is a simpler
-            view with the sole purpose of fetching and displaying data received
-            from the model via the controller.
+            persisting the information required by the system. The DBMS is
+            solely and exclusively responsible for the storage and retrieval of
+            data, as well as enforcing integrity rules on the dataset.
+            Information to be persisted includes the zones, areas, points and
+            live location history of players.
+        \item \textbf{Views} - The Android app, iOS app and website all serve
+            as different views. The website is a view that uses the controller
+            to read, create, update and destroy data stored within the model in
+            order to manage the mapping of courses. The Android and iOS apps
+            are simpler views with the sole purpose of fetching and displaying
+            data received from the model via the controller, and calculating
+            contextual information based on the received data.
         \item \textbf{Controller} - The API serves as the controller. It acts
             as a level of abstraction between the model and the views by
-            controlling the access to the model.
+            controlling the access to the model. For a complete listing of the
+            API endpoints, see the \textit{Swagger Documentation} [2].
     \end{itemize}
 
-    \subsubsection{Mapper API Architecture}
+    \subsubsection{Zoning API Architecture}
 
-    The Mapper API is designed as a persistence framework architecture. This
+    The Zoning API is designed as a persistence framework architecture. This
     architecture is a good choice for the API as it allows the hiding of the
     specific database implementation from the business objects.
 
@@ -462,28 +488,62 @@
             performed with persisted objects.
     \end{itemize}
 
+    In order to allow the reuse of the Zoning API in generic mapping
+    applications, the objects handled by the API are designed as a composite
+    structure, as Figure \ref{fig:composite} shows. Every zone can have child
+    zones and hold any amount of elements. This structure allows the API to be
+    used for arbitrary zone mapping, with a specific application to the Golf
+    Course Mapper system where a Hole is a child zone of a Course.
+
+    \begin{center}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.6]{Composite}
+            \caption{UML Class Diagram illustrating the composite structure of
+                the API objects.}
+            \label{fig:composite}
+        \end{figure}
+    \end{center}
+
     \subsection{Configuration}
 
-    The Web Application and Mapper API will both be hosted on a Microsoft Azure
-    Web Server. This includes the PostgreSQL DBMS, .NET Core Entity Framework
-    and the Angular web service.
+    The Web Application and Zoning API will both be hosted on a Amazon Web
+    Services (AWS) Ubuntu Server. This includes the PostgreSQL DBMS, .NET Core
+    Entity Framework and the Angular web service.
 
-    The mobile app will be available on the Google Play Store for download on
-    any mobile device that hosts an Android system above version 4.4 (KitKat).
-    Finally, the web application will be available through a public URL that
-    can be accessed by any course managers that wish to use the web
-    application.
+    The Android app will be available on the Google Play Store for download
+    [3] on any mobile device that hosts an Android system with a minimum
+    version of 4.4 (KitKat). The iOS app will not be available on the app
+    store, but will be available on the GitHub repositories for installation on
+    any Apple device. Finally, the web application will be available through a
+    public URL [4] that can be accessed by any course manager that wishes to
+    use the web application.
 
     The deployment diagram in figure \ref{fig:depdia} illustrates the
     configuration of the system.
 
     \begin{center}
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.9]{DeploymentDiagram}
+            \includegraphics[scale=0.5]{DeploymentDiagram}
             \caption{Deployment diagram illustrating system configuration.}
             \label{fig:depdia}
         \end{figure}
     \end{center}
+
+    \newpage
+
+    \section{References}
+
+    \begin{enumerate}
+        \item Testing Policy
+        (\url{https://github.com/team-recursive-recursion/documentation/raw/master/publish/testing-policy.pdf})
+		\item Swagger Documentation
+		(\url{http://ec2-18-191-152-232.us-east-2.compute.amazonaws.com/swagger}
+		\item Android App Play Store
+		(\url{https://play.google.com/store/apps/details?id=recrec.golfcourseviewer})
+		\item Web Application
+		(\url{http://ec2-18-191-152-232.us-east-2.compute.amazonaws.com})
+    \end{enumerate}
 
 \end{document}
